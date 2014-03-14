@@ -19,9 +19,11 @@ filehandler = logging.handlers.TimedRotatingFileHandler('/tmp/paradium.log', whe
 filehandler.setFormatter(logging.Formatter(fmt='%(asctime)s %(levelname)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
 logger.addHandler(filehandler)
 
-# setup environment variables
-PARADIUM_HOME    = '/opt/paradium'
-PARADIUM_MPDHOST = '127.0.0.1'
+# setup environment variable defaults
+PARADIUM_HOME     = '/opt/paradium'
+PARADIUM_MPDHOST  = '127.0.0.1'
+
+# and override with the actual environment
 if 'PARADIUM_HOME' in os.environ:
 	PARADIUM_HOME = os.environ['PARADIUM_HOME']
 if 'PARADIUM_MPDHOST' in os.environ:
@@ -163,33 +165,37 @@ class ParadiumHandler(SimpleHTTPRequestHandler):
 
 
 
-class ParadiumServer(Daemon):
+class ParadiumServer(socketserver.TCPServer):
 	"""
-	server wrapper
+	TCP server overload to reuse address and stuff
+	"""
+	def __init__(self, bind_address = "", port = 80):
+		self.allow_reuse_address = True
+		socketserver.TCPServer.__init__(self, (bind_address, port), ParadiumHandler)
+		
+		return
+
+
+class ParadiumDaemon(Daemon):
+	"""
+	daemon wrapper
 	"""
 
 	def run(self):
 		try:
-			port = 80
-			httpd = socketserver.TCPServer(("", port), ParadiumHandler)
-			
-			httpd.allow_reuse_address = True
+			self.tmp_server = ParadiumServer("")
 			print('started httpserver, listening...')
-	
-			httpd.serve_forever()
-
+			self.tmp_server.serve_forever()
 			print('loop done...')
 
 		except KeyboardInterrupt:
 			print('^C received, shutting down server')
-			httpd.socket.close()
-
+			self.tmp_server.socket.close()
 		return
 
 
-
 if __name__ == '__main__':
-	daemon = ParadiumServer('/tmp/paradium-daemon.pid')
+	daemon = ParadiumDaemon('/tmp/paradium-daemon.pid')
 	if len(sys.argv) == 2:
 		logger.info('{} {}'.format(sys.argv[0],sys.argv[1]))
  
