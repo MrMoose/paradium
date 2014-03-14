@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes" ?>
+<!DOCTYPE document SYSTEM "stations.dtd">
+
+<stations>
+    <station> 
+        <name>Radio Paradise</name>
+        <!-- Europe (UK) server -->
+        <url>http://stream-uk1.radioparadise.com/aac-128</url>
+        <!-- Russian server -->
+        <url>http://stream-ru1.radioparadise.com:9000/aac-128</url>
+
+	<website>http://www.radioparadise.com/</website>
+    </station>
+
+</stations>

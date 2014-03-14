@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name = "viewport" content = "width=device-width, initial-scale=1" />
+
+		<!-- jQuery mobile with my theme -->
+		<link rel="stylesheet" href="/themes/paradium.min.css" />
+		<link rel="stylesheet" href="/themes/jquery.mobile.icons.min.css" />
+		<link rel="stylesheet" href="jquery.mobile.structure-1.4.2.min.css" />
+		<script src="/jquery-1.11.0.js"></script>
+		<script src="/jquery.mobile-1.4.2.js"></script>
+
+		<title>Paradium web interface 0.2</title>
+	</head>
+
+<body>
+<div data-role="page" id="dashboard-page">
+	<div data-role=header>
+		<h1>Paradium</h1>
+
+		<div class="ui-grid-a">
+			<div class="ui-block-a" style="width:35%">Station</div>
+			<div class="ui-block-b" id="current-station">Radio</div>
+			<div class="ui-block-a" style="width:35%">Song</div>
+			<div class="ui-block-b" id="current-song">...</div>
+		</div><!-- /grid-a -->
+
+
+		<script>
+$( "#current-station" ).load( "/current_station.html" );
+
+setInterval(function() { // reload the current station	
+	$( "#current-station" ).load( "/current_station.html" );
+}, 10000); // Every 10 seconds
+
+$( "#current-song" ).load( "/current_song.html" );
+
+setInterval(function() { // reload the current song
+	$( "#current-song" ).load( "/current_song.html" );
+}, 10000); // Every 10 seconds
+
+		</script>
+
+	</div> <!-- header -->
+
+	<div data-role="controls">
+
+		<input type="button" id="buttonPlay" value="Play">
+		<input type="button" id="buttonStop" value="Stop">
+		<input type="button" id="buttonShutdown" value="Turn Off">
+
+		<script>
+
+$("#buttonPlay").click(
+	function() { $.get( "/paradium.html?command=play" ); }
+);
+
+$("#buttonStop").click(
+	function() { $.get( "/paradium.html?command=stop" ); }
+);
+	
+$("#buttonShutdown").click(
+	function() { $.get( "/paradium.html?command=shutdown" ); }
+);
+	
+		</script>
+
+	</div>
+
+</body>
+</html>
+	
