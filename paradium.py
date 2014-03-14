@@ -11,24 +11,32 @@ import logging.handlers
 from urllib.parse import urlparse, parse_qs, unquote
 from subprocess import call
 from mpd import MPDClient
- 
+
+# Setup logging
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 filehandler = logging.handlers.TimedRotatingFileHandler('/tmp/paradium.log', when='midnight', interval=1, backupCount=10)
 filehandler.setFormatter(logging.Formatter(fmt='%(asctime)s %(levelname)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S'))
 logger.addHandler(filehandler)
 
+# setup environment variables
+PARADIUM_HOME    = '/opt/paradium'
+PARADIUM_MPDHOST = '127.0.0.1'
+if 'PARADIUM_HOME' in os.environ:
+	PARADIUM_HOME = os.environ['PARADIUM_HOME']
+if 'PARADIUM_MPDHOST' in os.environ:
+	PARADIUM_MPDHOST = os.environ['PARADIUM_MPDHOST']
 
+# setup global MPD client object
 client = MPDClient()
-client.connect("127.0.0.1", 6600)
-
+client.connect(PARADIUM_MPDHOST, 6600)
 
 
 # modify this to add additional routes
 ROUTES = (
     # [url_prefix ,  directory_path]
     ['/media', '/var/www/media'],
-    ['',       '/opt/paradium/htdocs']  # empty string for the 'default' match
+    ['', PARADIUM_HOME + '/htdocs']  # empty string for the 'default' match
 ) 
 
 
