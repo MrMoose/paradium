@@ -1,6 +1,7 @@
 <!ELEMENT stations
 	(station*)>
-<!ELEMENT station (name, url+, website?)>
+<!ELEMENT station (id, name, url+, website?)>
+<!ELEMENT id (#PCDATA)>
 <!ELEMENT name (#PCDATA)>
 <!ELEMENT url (#PCDATA)>
 <!ELEMENT website (#PCDATA)>

@@ -2,14 +2,20 @@
 <!DOCTYPE document SYSTEM "stations.dtd">
 
 <stations>
-    <station> 
+	<station id="1">
+		<!-- The one and only -->
         <name>Radio Paradise</name>
         <!-- Europe (UK) server -->
         <url>http://stream-uk1.radioparadise.com/aac-128</url>
         <!-- Russian server -->
         <url>http://stream-ru1.radioparadise.com:9000/aac-128</url>
-
-	<website>http://www.radioparadise.com/</website>
+		<website>http://www.radioparadise.com/</website>
     </station>
-
+	<station id="2">
+		<!-- Burning Man informational radio -->
+        <name>BMIR</name>
+        <!-- seems to be only one -->
+		<url>http://bmir-ice.streamguys.com/live.m3u</url>
+		<website>http://www.bmir.org/</website>
+    </station>
 </stations>
