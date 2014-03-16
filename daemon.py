@@ -4,7 +4,7 @@
 # published without license but I guess it should be OK
 #
 import sys, os, time, atexit
-from signal import SIGTERM
+from signal import SIGTERM, SIGINT
 import logging
 import logging.handlers
  
@@ -135,7 +135,7 @@ class Daemon(object):
  
         # Try killing daemon process.
         try:
-            os.kill(pid, SIGTERM)
+            os.kill(pid, SIGINT)
             time.sleep(1)
         except OSError as e:
             print(str(e))

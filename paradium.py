@@ -233,11 +233,8 @@ class ParadiumServer(HTTPServer):
 	TCP server overload to reuse address and stuff
 	"""
 	
-	def __init__(self, bind_address = "", port = 8080):
+	def __init__(self, bind_address = "", port = 80):
 	
-		# read user data object
-		dm = DataModel(logger)
-
 		# Initialize server itself
 		self.allow_reuse_address = True
 		HTTPServer.__init__(self, (bind_address, port), ParadiumHandler)
@@ -245,7 +242,8 @@ class ParadiumServer(HTTPServer):
 		return
 
 	def stop(self):
-		self.m_dm.persist()
+		logger.info('ParadiumServer exiting...')
+		dm.persist()
 		return
 
 
@@ -261,15 +259,12 @@ class ParadiumDaemon(Daemon):
 			self.tmp_server.serve_forever()
 			print('loop done...')
 
+			self.tmp_server.stop()
+	
 		except KeyboardInterrupt:
-			print('^C received, shutting down server')
+			self.tmp_server.shutdown()
 			self.tmp_server.socket.close()
 			self.tmp_server.stop()
-		return
-
-	def stop(self):
-		self.tmp_server.stop()
-		Daemon.stop(self)
 		return
 
 
