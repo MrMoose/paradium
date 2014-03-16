@@ -47,6 +47,10 @@ setInterval(function() { // reload the current song
 	<div data-role="controls">
 
 		<input type="button" id="buttonPlay" value="Play">
+		<div class="ui-grid-a">
+			<div class="ui-block-a"><input type="button" id="buttonPrev" value="Prev" /></div>
+			<div class="ui-block-b"><input type="button" id="buttonNext" value="Next" /></div>
+		</div><!-- /grid-a -->
 		<input type="button" id="buttonStop" value="Stop">
 		<input type="button" id="buttonShutdown" value="Turn Off">
 
@@ -54,6 +58,14 @@ setInterval(function() { // reload the current song
 
 $("#buttonPlay").click(
 	function() { $.get( "/paradium.html?command=play" ); }
+);
+
+$("#buttonPrev").click(
+	function() { $.get( "/paradium.html?command=prev" ); }
+);
+
+$("#buttonNext").click(
+	function() { $.get( "/paradium.html?command=next" ); }
 );
 
 $("#buttonStop").click(
@@ -67,7 +79,7 @@ $("#buttonShutdown").click(
 		</script>
 
 	</div>
-
+</div>
 </body>
 </html>
 	

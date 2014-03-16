@@ -12,17 +12,16 @@
 		<website>http://www.radioparadise.com/ios-content.php</website>
     </station>
 	<station id="2">
-		<!-- Burning Man informational radio -->
-        <name>BMIR</name>
+		<!-- Psychedelik has multiple streams this is called Ambient -->
+        <name>Psychedelik/</name>
         <!-- seems to be only one -->
-		<url>http://bmir-ice.streamguys.com/live.m3u</url>
-		<website>http://www.bmir.org/</website>
+		<url>http://88.191.102.69:8002/;stream.mp3</url>
+		<website>http://www.psychedelik.com/</website>
     </station>
 	<station id="3">
-		<!-- Alpha FM -->
-        <name>Alpha FM</name>
-        <!-- seems to be only one -->
-		<url>http://www.webnow.com.br/streaming/autoplaylist/v1/alpha.aac.pls</url>
-		<website>http://www.alphafm.com.br/</website>
+		<!-- Burning Man informational radio -->
+        <name>BMIR</name>
+		<url>http://bmir-ice.streamguys.com/live</url>
+		<website>http://www.bmir.org/</website>
     </station>
 </stations>
