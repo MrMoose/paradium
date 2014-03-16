@@ -1,5 +1,5 @@
-<?xml version="1.0" standalone="yes" ?>
-<!DOCTYPE document SYSTEM "stations.dtd">
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE stations SYSTEM "stations.dtd">
 
 <stations>
 	<station id="1">
@@ -9,7 +9,7 @@
         <url>http://stream-uk1.radioparadise.com/aac-128</url>
         <!-- Russian server -->
         <url>http://stream-ru1.radioparadise.com:9000/aac-128</url>
-		<website>http://www.radioparadise.com/</website>
+		<website>http://www.radioparadise.com/ios-content.php</website>
     </station>
 	<station id="2">
 		<!-- Burning Man informational radio -->
@@ -17,5 +17,12 @@
         <!-- seems to be only one -->
 		<url>http://bmir-ice.streamguys.com/live.m3u</url>
 		<website>http://www.bmir.org/</website>
+    </station>
+	<station id="3">
+		<!-- Alpha FM -->
+        <name>Alpha FM</name>
+        <!-- seems to be only one -->
+		<url>http://www.webnow.com.br/streaming/autoplaylist/v1/alpha.aac.pls</url>
+		<website>http://www.alphafm.com.br/</website>
     </station>
 </stations>
