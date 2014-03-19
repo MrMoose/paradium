@@ -24,7 +24,7 @@ logger.addHandler(filehandler)
 # setup environment variable defaults
 PARADIUM_HOME     = '/opt/paradium/'
 PARADIUM_VHOME    = '/var/paradium/'
-PARADIUM_MPDHOST  = '127.0.0.1'
+PARADIUM_MPDHOST  = '/var/run/mpd/socket'
 
 # and override with the actual environment
 if 'PARADIUM_HOME' in os.environ:
