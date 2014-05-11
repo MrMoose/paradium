@@ -1,0 +1,13 @@
+#!/bin/sh
+ACTION=$(expr "$ACTION" : "\([a-zA-Z]\+\).*")
+if [ "$ACTION" = "add" ]; then
+  for f in /sys/devices/virtual/input/input*/name; do
+    mac=$(cat $f|sed 's/:/_/g')
+    sleep 1
+    if [ ! -z "$(sudo -u sm pactl list short|grep $mac)" ]; then
+#      su - sm -c 'pactl load-module module-loopback source=bluez_source.'$mac' sink=alsa_output.platform-bcm2835_AUD0.0.analog-stereo rate=44100 adjust_time=0'
+      sudo -u sm pactl load-module module-loopback source=bluez_source.$mac rate=44100 adjust_time=0
+    fi
+  done
+fi
+
